@@ -21,61 +21,23 @@ public class Cv {
 
     @Field(type = FieldType.Text, name = "name")
     private String name;
-    @Field(type = FieldType.Text, name = "birthDate")
-    private String birthDate;
-    @Field(type = FieldType.Nested, name = "experiences")
-    private ArrayList<String> experiences;
-    @Field(type = FieldType.Nested, name = "etudes")
-    private ArrayList<String> etudes;
-    @Field(type = FieldType.Nested, name = "competences")
-    private ArrayList<String> competences;
+    @Field(type = FieldType.Text, name = "content")
+    private String content;
 
-    public Cv(String name, String birthDate, ArrayList<String> experiences, ArrayList<String> etudes,
-              ArrayList<String> competences) {
+    public Cv(String name, String content){
         this.id = generate_id();
-        this.name = name;
-        this.birthDate = birthDate;
-        this.experiences = experiences;
-        this.etudes = etudes;
-        this.competences = competences;
+        this.name=name;
+        this.content = content;
+
     }
-
-    public Cv(InputStream input) {
-
-        Scanner scanner;
-        try {
-            scanner = new Scanner(input);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] splitted = line.split(":");
-                if (splitted.length > 1)
-                    fill(splitted);
-            }
-            scanner.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public Cv(String id, String name, String content){
+        this.id = id;
+        this.name=name;
+        this.content = content;
     }
 
     public String getId() {
         return this.id;
-    }
-
-    private void fill(String[] splitted) {
-        if (splitted[0].contains("name"))
-            this.name = splitted[1];
-        else if (splitted[0].contains("birth"))
-            this.birthDate = splitted[1];
-        else if (splitted[0].contains("experience")) {
-            String[] xps = splitted[1].split(";");
-            this.experiences.addAll(Arrays.asList(xps));
-        } else if (splitted[0].contains("etude")) {
-            String[] studies = splitted[1].split(";");
-            this.experiences.addAll(Arrays.asList(studies));
-        } else if (splitted[0].contains("competence")) {
-            String[] cmpts = splitted[1].split(";");
-            this.competences.addAll(Arrays.asList(cmpts));
-        }
     }
 
     public String getName() {
@@ -86,45 +48,14 @@ public class Cv {
         this.name = name;
     }
 
-    public String getBirthDate() {
-        return birthDate;
+    public String getContent() {
+        return this.content;
     }
 
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public ArrayList<String> getExperiences() {
-        return experiences;
-    }
-
-    public void setExperiences(ArrayList<String> experiences) {
-        this.experiences = experiences;
-    }
-
-    public ArrayList<String> getEtudes() {
-        return etudes;
-    }
-
-    public void setEtudes(ArrayList<String> etudes) {
-        this.etudes = etudes;
-    }
-
-    public ArrayList<String> getCompetences() {
-        return competences;
-    }
-
-    public void setCompetences(ArrayList<String> competences) {
-        this.competences = competences;
-    }
-
-    public String toString() {
-        String str = "{\n   Name : " + this.name;
-        str += "\n   Birth Date : " + this.birthDate + "\n   Experiences : " + this.experiences.toString();
-        str += "\n   Etudes : " + this.etudes.toString() + "\n   competences : " + this.competences.toString();
-        str += "\n}";
-        return str;
-    }
 
     private final String ID_GENERATOR = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static ArrayList<String> ids = new ArrayList<>();
