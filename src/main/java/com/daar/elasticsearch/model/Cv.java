@@ -24,13 +24,6 @@ public class Cv {
     private String content;
 
     public Cv(String name, String content){
-        this.id = generate_id();
-        this.name=name;
-        this.content = content;
-
-    }
-    public Cv(String id, String name, String content){
-        this.id = id;
         this.name=name;
         this.content = content;
     }
@@ -59,16 +52,6 @@ public class Cv {
     private final String ID_GENERATOR = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static ArrayList<String> ids = new ArrayList<>();
 
-    private String generate_id() {
-        StringBuilder str = new StringBuilder();
-        for (int i = 0; i < 32; i++) {
-            str.append(ID_GENERATOR.charAt((int) Math.floor(Math.random() * 36)));
-        }
-        while (ids.contains(str.toString()))
-            str = new StringBuilder(generate_id());
-        ids.add(str.toString());
-        return str.toString();
-    }
 
 }
 

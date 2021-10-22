@@ -25,4 +25,10 @@ public class CvController {
         return cvService.findById(id);
     }
 
+    @GetMapping
+    public Iterable<Cv> findAll(){
+        return cvService.findAllCv();
+
+    }
+
 }

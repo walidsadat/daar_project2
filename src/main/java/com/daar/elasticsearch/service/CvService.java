@@ -21,4 +21,8 @@ public class CvService {
     public Cv findById(final String id){
         return cvRepository.findById(id).orElse(null);
     }
+
+    public Iterable<Cv> findAllCv(){
+        return cvRepository.findAll();
+    }
 }
