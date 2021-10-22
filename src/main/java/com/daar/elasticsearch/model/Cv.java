@@ -1,6 +1,5 @@
 package com.daar.elasticsearch.model;
 
-import java.io.InputStream;
 import java.util.*;
 
 import com.daar.elasticsearch.indices.Index;
