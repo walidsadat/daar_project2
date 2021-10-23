@@ -16,19 +16,12 @@ public class CvController {
     }
 
     @PostMapping
-    public void save(@RequestBody final Cv cv){
-        cvService.save(cv);
+    public void index(@RequestBody final Cv cv){
+        cvService.index(cv);
     }
 
     @GetMapping("/{id}")
     public Cv findById(@PathVariable final String id){
-        return cvService.findById(id);
+        return cvService.getById(id);
     }
-
-    @GetMapping
-    public Iterable<Cv> findAll(){
-        return cvService.findAllCv();
-
-    }
-
 }
