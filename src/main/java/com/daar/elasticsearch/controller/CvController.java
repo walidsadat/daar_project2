@@ -1,9 +1,12 @@
 package com.daar.elasticsearch.controller;
 
 import com.daar.elasticsearch.model.Cv;
+import com.daar.elasticsearch.search.SearchCvRequest;
 import com.daar.elasticsearch.service.CvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/cv")
@@ -23,5 +26,10 @@ public class CvController {
     @GetMapping("/{id}")
     public Cv findById(@PathVariable final String id){
         return cvService.getById(id);
+    }
+
+    @PostMapping("/search")
+    public List<Cv> search(@RequestBody final SearchCvRequest request){
+        return cvService.search(request);
     }
 }
