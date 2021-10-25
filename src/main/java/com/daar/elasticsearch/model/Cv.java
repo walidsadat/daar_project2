@@ -29,11 +29,9 @@ public class Cv {
     public void setContent(String content) {
         this.content = content;
     }
-
     public Date getCreated() {
         return created;
     }
-
     public void setCreated(Date created) {
         this.created = created;
     }

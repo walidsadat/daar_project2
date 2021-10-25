@@ -38,11 +38,24 @@ public class CvService {
         this.client = client;
     }
 
+    public List<Cv> getAllCv(){
+        return search(new SearchCvRequest());
+    }
+
     public List<Cv> search(final SearchCvRequest request){
         final SearchRequest searchRequest = SearchEngine.buildSearchRequest(
                 Index.CV_INDEX,
                 request
         );
+
+        return searchInternal(searchRequest);
+    }
+
+    private List<Cv> searchInternal (SearchRequest searchRequest){
+        if(searchRequest == null) {
+            LOG.error("Failed to build search request");
+            return Collections.emptyList();
+        }
 
         try {
             final SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
@@ -99,5 +112,4 @@ public class CvService {
             return null;
         }
     }
-
 }

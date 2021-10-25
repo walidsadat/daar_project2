@@ -4,6 +4,7 @@ import com.daar.elasticsearch.model.Cv;
 import com.daar.elasticsearch.search.SearchCvRequest;
 import com.daar.elasticsearch.service.CvService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class CvController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void index(@RequestBody final Cv cv){
         cvService.index(cv);
     }
@@ -32,4 +34,7 @@ public class CvController {
     public List<Cv> search(@RequestBody final SearchCvRequest request){
         return cvService.search(request);
     }
+
+    @PostMapping("/all")
+    public List<Cv> search() {return cvService.getAllCv();}
 }

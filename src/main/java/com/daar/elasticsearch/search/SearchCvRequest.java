@@ -7,8 +7,8 @@ import java.util.List;
 public class SearchCvRequest {
     private List<String> fields;
     private String searchTerm;
-    private SortOrder sortOrder;
     private String sortBy;
+    private SortOrder sortOrder;
 
     public List<String> getFields(){
         return fields;
