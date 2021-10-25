@@ -5,6 +5,7 @@ import com.daar.elasticsearch.search.SearchCvRequest;
 import java.util.List;
 
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.util.CollectionUtils;
 
 import org.elasticsearch.action.search.SearchRequest;
@@ -20,8 +21,15 @@ public class SearchEngine {
     private SearchEngine() {}
 
     public static SearchRequest buildSearchRequest(final String indexName, final SearchCvRequest request){
-        final SearchSourceBuilder builder = new SearchSourceBuilder()
+        SearchSourceBuilder builder = new SearchSourceBuilder()
                 .postFilter(getQueryBuilder(request));
+
+        if(request.getSortBy() != null){
+            builder = builder.sort(
+                    request.getSortBy(),
+                    request.getSortOrder() != null ? request.getSortOrder() : SortOrder.ASC
+            );
+        }
 
         SearchRequest searchRequest = new SearchRequest(indexName);
         searchRequest.source(builder);
