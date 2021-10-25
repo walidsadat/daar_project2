@@ -1,8 +1,14 @@
 package com.daar.elasticsearch.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
 public class Cv {
     private String id;
     private String content;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date created;
 
     //empty constructor to avoid JacksonMappingException problems when we try to deserialize JSon to Cv https://www.baeldung.com/jackson-exception
     public Cv(){
@@ -24,5 +30,12 @@ public class Cv {
         this.content = content;
     }
 
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
 }
 
