@@ -5,6 +5,9 @@
     },
     "content" : {
       "type" : "text"
+    },
+    "created" : {
+      "type" : "date"
     }
   }
 }
