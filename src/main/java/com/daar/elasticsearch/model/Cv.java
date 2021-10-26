@@ -3,9 +3,13 @@ package com.daar.elasticsearch.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class Cv {
-    private String id;
+    private UUID idGen;
+
+    private static Integer cpt = 0;
+    private final String id;
     private String content;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date created;
@@ -13,11 +17,9 @@ public class Cv {
     //empty constructor to avoid JacksonMappingException problems when we try to deserialize JSon to Cv https://www.baeldung.com/jackson-exception
     public Cv(){
         super();
-    }
-
-    public Cv(String id, String content){
-        this.id=id;
-        this.content = content;
+        idGen = UUID.randomUUID();
+        cpt++;
+        this.id=idGen.toString();
     }
 
     public String getId() {
