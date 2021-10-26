@@ -26,15 +26,18 @@ public class CvController {
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.FOUND)
     public Cv findById(@PathVariable final String id){
         return cvService.getById(id);
     }
 
     @PostMapping("/search")
+    @ResponseStatus(HttpStatus.FOUND)
     public List<Cv> search(@RequestBody final SearchCvRequest request){
         return cvService.search(request);
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.FOUND)
     public List<Cv> search() {return cvService.getAllCv();}
 }
