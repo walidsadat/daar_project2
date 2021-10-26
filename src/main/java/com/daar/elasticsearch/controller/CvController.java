@@ -35,6 +35,6 @@ public class CvController {
         return cvService.search(request);
     }
 
-    @PostMapping("/all")
+    @GetMapping
     public List<Cv> search() {return cvService.getAllCv();}
 }
