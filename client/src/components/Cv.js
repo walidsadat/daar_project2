@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 
 const Cv = ({
     id,
-    content
+    content,
+    created
 }) => {
   return (
     <div className="card text-center mb-3 mr-3" style={{ width: "18rem" }}>
