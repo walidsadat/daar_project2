@@ -119,10 +119,11 @@ public class CvService {
     public boolean indexFile(File file) {
         try {
             final String cvAsString = PDFParser.parsePdf(file.getAbsolutePath());
-
             final IndexRequest request = new IndexRequest(Index.CV_INDEX);
             request.id(UUID.randomUUID().toString());
             request.source(cvAsString, XContentType.JSON);
+
+
 
             final IndexResponse reponse = client.index(request, RequestOptions.DEFAULT);
 

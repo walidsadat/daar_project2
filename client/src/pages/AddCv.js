@@ -33,9 +33,19 @@ export default class Home extends Component {
       this.state.file.name
     )
 
-    axios.post("http://localhost:8080/api/cv/file",{
-        content : this.state.file
-      }).catch(error => console.log(error));
+      const fs = require('fs');
+      const pdf = require('pdf-parse');
+
+      let dataBuffer = fs.readFileSync(this.state.file.path);
+
+
+      pdf(dataBuffer).then(function(data) {
+          axios.post("http://localhost:8080/api/cv",{
+              content : data.text
+          }).catch(error => console.log(error));
+      });
+
+
   }
 
 render() {
