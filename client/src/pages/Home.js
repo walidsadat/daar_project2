@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import Cv from '../components/Cv'
 import CvIcon from "../assets/5112.png"
 import "./Home.css"
 
@@ -73,7 +72,7 @@ export default class Home extends Component {
         </div>
         {this.state.cvs.map((cv) => (
           <div className="center">
-          <a href={"http://localhost:8080/api/cv/"+cv.id}>
+          <a href={"http://localhost:3001/"+ cv.id}>
           <img src={CvIcon} width={50} height={50} alt={cv.id}/>
           {"added on :" + cv.created.split("T")[0]}
           <br/>

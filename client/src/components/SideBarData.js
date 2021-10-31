@@ -16,11 +16,5 @@ export const SidebarData = [
     path: '/addCv',
     icon: <AiIcons.AiOutlinePlusCircle />,
     cName: 'nav-text'
-  },
-  {
-    title: 'Search a cv',
-    path: '/searchcv',
-    icon: <IoIcons.IoMdSearch />,
-    cName: 'nav-text'
-  },
+  }
 ];
