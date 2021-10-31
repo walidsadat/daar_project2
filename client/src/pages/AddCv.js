@@ -47,7 +47,7 @@ render() {
       <br/>
       <h3 className='center'> Upload your cv</h3>
       <div className='center'>
-        <input type="file" v-model="file" accept=".pdf" onChange={this.onFileChange} />
+        <input type="file" accept=".pdf" onChange={this.onFileChange} />
         <button onClick={this.onFileUpload}>
           Send
         </button>

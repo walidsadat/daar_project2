@@ -19,7 +19,6 @@ export default class Home extends Component {
     {},
     {
       params: {
-        pageSize:60,
         sortBy:"created",
         withCredentials : false
       }
