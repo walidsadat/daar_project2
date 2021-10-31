@@ -29,10 +29,13 @@ export default class Home extends Component {
   onFileUpload = () =>{
     const formData = new FormData();
     formData.append(
-      this.state.file
+      this.state.file,
+      this.state.file.name
     )
 
-    console.log(this.state.file)
+    axios.post("http://localhost:8080/api/cv/file",{
+        content : this.state.file
+      }).catch(error => console.log(error));
   }
 
 render() {

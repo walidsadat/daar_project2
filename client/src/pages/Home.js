@@ -71,7 +71,7 @@ export default class Home extends Component {
         </div>
         {this.state.cvs.map((cv) => (
           <div className="center">
-          <a href={"http://localhost:3001/"+ cv.id}>
+          <a href={"http://localhost:3000/"+ cv.id}>
           <img src={CvIcon} width={50} height={50} alt={cv.id}/>
           {"added on :" + cv.created.split("T")[0]}
           <br/>
