@@ -55,16 +55,16 @@ export default class Home extends Component {
       ).then((response) => {this.setState({cvs: response.data})}
       ).catch(error => console.log(error));
     }
-    
   }
+
   render() {
     return (
       <div>
-        <div>
+        <div className ="center">
           <input 
           type="text"
           id="search-bar"
-          placeholder="Competence to search"
+          placeholder="Skill to search"
           onChange={this.handleSearchChange}/>
           <button onClick={this.handleSearch}>
             Search
