@@ -2,6 +2,7 @@ package com.daar.elasticsearch.service;
 
 import com.daar.elasticsearch.indices.Index;
 import com.daar.elasticsearch.model.Cv;
+import com.daar.elasticsearch.pdfparser.PDFParser;
 import com.daar.elasticsearch.search.SearchCvRequest;
 import com.daar.elasticsearch.search.engine.SearchEngine;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,7 +21,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -107,6 +112,21 @@ public class CvService {
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             return false;
+        }
+    }
+
+    public void indexFile(MultipartFile file){
+        try{
+            File convFile = new File("src/main/resources/static/pdfs/"+ file.getOriginalFilename());
+            FileOutputStream fos = new FileOutputStream(convFile);
+            fos.write (file.getBytes());
+            fos.close();
+            String cvAsString = PDFParser.parsePdf(convFile.getAbsolutePath());
+            Cv cv = new Cv();
+            cv.setContent(cvAsString);
+            index(cv);
+         } catch (IOException e) {
+             e.printStackTrace();
         }
     }
 }

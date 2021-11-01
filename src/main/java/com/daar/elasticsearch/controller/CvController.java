@@ -40,15 +40,11 @@ public class CvController {
 
     @PostMapping("/file")
     public void indexFile(@RequestPart("file") final MultipartFile file) throws IOException {
-        File convFile = new File("src/main/resources/cvs/"+file.getOriginalFilename());
-        FileOutputStream fos = new FileOutputStream(convFile);
-        fos.write (file.getBytes());
-        fos.close();
-        String cvAsString = PDFParser.parsePdf(convFile.getAbsolutePath());
-        Cv cv = new Cv();
-        cv.setContent(cvAsString);
-        cvService.index(cv);
+            cvService.indexFile(file);
+
     }
+
+
 
     @PostMapping("/all")
     public List<Cv> search() {return cvService.getAllCv();}
