@@ -35,6 +35,7 @@ import java.util.List;
 public class CvService {
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final Logger LOG = LoggerFactory.getLogger(IndexService.class);
+    public static final String PDF_FILES_DIRECTORY = "src/main/resources/static/pdfs/";
 
     private final RestHighLevelClient client;
 
@@ -108,25 +109,25 @@ public class CvService {
             final IndexResponse response = client.index(request, RequestOptions.DEFAULT);
 
             return response != null && response.status().equals(RestStatus.OK);
-
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             return false;
         }
     }
 
-    public void indexFile(MultipartFile file){
+    public boolean indexFile(MultipartFile file){
         try{
-            File convFile = new File("src/main/resources/static/pdfs/"+ file.getOriginalFilename());
+            File convFile = new File(PDF_FILES_DIRECTORY + file.getOriginalFilename());
             FileOutputStream fos = new FileOutputStream(convFile);
             fos.write (file.getBytes());
             fos.close();
             String cvAsString = PDFParser.parsePdf(convFile.getAbsolutePath());
             Cv cv = new Cv();
             cv.setContent(cvAsString);
-            index(cv);
+            return index(cv);
          } catch (IOException e) {
              e.printStackTrace();
+             return false;
         }
     }
 }

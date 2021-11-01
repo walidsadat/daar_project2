@@ -30,6 +30,9 @@ public class CvController {
         cvService.index(cv);
     }
 
+    @PostMapping("/file")
+    public void indexFile(@RequestPart("file") final MultipartFile file) throws IOException { cvService.indexFile(file);}
+
     @GetMapping("/{id}")
     public Cv findById(@PathVariable final String id){
         return cvService.getById(id);
@@ -39,9 +42,6 @@ public class CvController {
     public List<Cv> search(@RequestBody final SearchCvRequest request){
         return cvService.search(request);
     }
-
-    @PostMapping("/file")
-    public void indexFile(@RequestPart("file") final MultipartFile file) throws IOException { cvService.indexFile(file);}
 
     @PostMapping("/all")
     public List<Cv> search() {return cvService.getAllCv();}
