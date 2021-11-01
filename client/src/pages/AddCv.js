@@ -5,51 +5,56 @@ export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: "",
+      content: "",
       file: null
     }
   }
 
   handleContentChange = (event) => {
-    this.setState({content: event.target.value})
+    this.setState({ content: event.target.value })
     console.log(this.state)
   }
-  handleAdd = () =>{
-    if(this.state.content.length > 0){
-      axios.post("http://localhost:8080/api/cv/",{
-        content : this.state.content
+  handleAdd = () => {
+    if (this.state.content.length > 0) {
+      axios.post("http://localhost:8080/api/cv/", {
+        content: this.state.content
       }).catch(error => console.log(error));
     }
   }
 
   onFileChange = event => {
-    this.setState({file: event.target.files[0]})
+    this.setState({ file: event.target.files[0] })
   }
 
-  onFileUpload = () =>{
-    const formData = new FormData();
-    formData.append('file', this.state.file)
-    axios.post("http://localhost:8080/api/cv/file", formData).catch(error => console.log(error));
+  onFileUpload = () => {
+    if (this.state.file) {
+      const formData = new FormData();
+      formData.append('file', this.state.file)
+      axios.post("http://localhost:8080/api/cv/file", formData)
+        .then(alert("Cv ajouté"))
+        .then(window.location.replace("http://localhost:3000"))
+        .catch(error => console.log(error));
+    }
   }
 
-render() {
-  return (
-    <div>
-      <form className='center'>
-      <textarea type="text" onChange={this.handleContentChange}/>
-      <button onClick={this.handleAdd}>
+  render() {
+    return (
+      <div>
+        <form className='center'>
+          <textarea type="text" onChange={this.handleContentChange} />
+          <button onClick={this.handleAdd}>
             Send
-      </button>
-      </form>
-      <br/>
-      <h3 className='center'> Upload your cv</h3>
-      <div className='center'>
-        <input type="file" accept=".pdf" onChange={this.onFileChange} />
-        <button onClick={this.onFileUpload}>
-          Send
-        </button>
+          </button>
+        </form>
+        <br />
+        <h3 className='center'> Upload your cv</h3>
+        <div className='center'>
+          <input type="file" accept=".pdf" onChange={this.onFileChange} />
+          <button onClick={this.onFileUpload}>
+            Send
+          </button>
+        </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 }

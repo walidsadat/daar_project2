@@ -14,7 +14,7 @@ export default class Cv extends Component {
 
   componentDidMount() {
     axios.defaults.withCredentials = false;
-    axios.get("http://localhost:8080/api/cv/" + this.state.id).then((response) =>{console.log(response); this.setState({id: response.data.id, content: response.data.content, created: response.data.created})}
+    axios.get("http://localhost:8080/api/cv/" + this.state.id).then((response) =>{this.setState({id: response.data.id, content: response.data.content, created: response.data.created})}
     ).catch(error => console.log(error));
   }
 
