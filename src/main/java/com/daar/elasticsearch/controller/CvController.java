@@ -45,7 +45,10 @@ public class CvController {
         FileOutputStream fos = new FileOutputStream(convFile);
         fos.write (file.getBytes());
         fos.close();
-        cvService.indexFile(convFile);
+        String cvAsString = PDFParser.parsePdf(convFile.getAbsolutePath());
+        Cv cv = new Cv();
+        cv.setContent(cvAsString);
+        cvService.index(cv);
     }
 
     @PostMapping("/all")

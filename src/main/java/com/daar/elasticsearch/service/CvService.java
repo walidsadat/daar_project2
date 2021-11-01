@@ -107,21 +107,6 @@ public class CvService {
 
             return reponse != null && reponse.status().equals(RestStatus.OK);
 
-
-        } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-            return false;
-        }
-    }
-
-    public boolean indexFile(File file) {
-        try {
-            String cvAsString = PDFParser.parsePdf(file.getAbsolutePath());
-            final IndexRequest request = new IndexRequest(Index.CV_INDEX);
-            request.id(UUID.randomUUID().toString());
-            request.source(cvAsString, XContentType.JSON);
-            final IndexResponse reponse = client.index(request, RequestOptions.DEFAULT);
-            return reponse != null && reponse.status().equals(RestStatus.OK);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
             return false;
