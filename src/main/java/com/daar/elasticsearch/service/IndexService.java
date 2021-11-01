@@ -45,7 +45,7 @@ public class IndexService {
 
         for(final String indexName : INDICES_TO_CREATE){
             try {
-                // first, let's check if the indice exists
+                // first, let's check if the index exist
                 boolean indexExists = client.indices().exists(new GetIndexRequest(indexName), RequestOptions.DEFAULT);
                 if(indexExists){
                     if(!deleteExisting)
@@ -78,7 +78,6 @@ public class IndexService {
            LOG.error("Failed to load mappings for index : '{}'", indexName);
            return null;
        }
-
        return mappings;
     }
 }

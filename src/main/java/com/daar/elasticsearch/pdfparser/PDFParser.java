@@ -19,7 +19,5 @@ public class PDFParser {
             return null;
         }
     }
-    public static void main(String[] args) {
-    System.out.println(parsePdf("/home/amine/Documents/elasticsearch/src/main/resources/static/pdfs/test.pdf"));
-    }
+
 }

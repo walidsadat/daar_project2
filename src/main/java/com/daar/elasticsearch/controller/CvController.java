@@ -4,7 +4,6 @@ import com.daar.elasticsearch.model.Cv;
 import com.daar.elasticsearch.pdfparser.PDFParser;
 import com.daar.elasticsearch.search.SearchCvRequest;
 import com.daar.elasticsearch.service.CvService;
-import org.elasticsearch.client.ml.inference.preprocessing.Multi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
