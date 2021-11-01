@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { API_URL } from "../App"
 
 
 export default class Cv extends Component {
@@ -14,37 +15,37 @@ export default class Cv extends Component {
 
   componentDidMount() {
     axios.defaults.withCredentials = false;
-    axios.get("http://localhost:8080/api/cv/" + this.state.id).then((response) =>{this.setState({id: response.data.id, content: response.data.content, created: response.data.created})}
+    axios.get(API_URL + this.state.id).then((response) => { this.setState({ id: response.data.id, content: response.data.content, created: response.data.created }) }
     ).catch(error => console.log(error));
   }
 
- render() {
-   let day = this.state.created.split("T")[0]
-   let time = this.state.created.split("T")[1]
-   if(time)
+  render() {
+    let day = this.state.created.split("T")[0]
+    let time = this.state.created.split("T")[1]
+    if (time)
       time = time.split(".")[0]
-  return (
-    <div>
-    <div className="center">
-      <h4>Id: </h4><br/>
-      {this.state.id} <br/>
-    </div>
-    <div className="center">
-      <h4>Created: </h4> <br/>
-      {day} <br/>
-    </div>
-    <div className="center">
-      <h4>On: </h4> <br/>
-      {time} <br/>
-    </div>
-      
-      <div className="center">
-    <h4> Content: </h4> <br/>
-    {this.state.content}<br/>
+    return (
+      <div>
+        <div className="center">
+          <h4>Id: </h4><br />
+          {this.state.id} <br />
+        </div>
+        <div className="center">
+          <h4>Created: </h4> <br />
+          {day} <br />
+        </div>
+        <div className="center">
+          <h4>On: </h4> <br />
+          {time} <br />
+        </div>
 
+        <div className="center">
+          <h4> Content: </h4> <br />
+          {this.state.content}<br />
+
+        </div>
       </div>
-      </div>
-      
-  );
-}
+
+    );
+  }
 }

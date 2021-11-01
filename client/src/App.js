@@ -7,6 +7,9 @@ import Home from './pages/Home';
 import AddCv from './pages/AddCv';
 import Cv from './pages/Cv';
 
+export const CLIENT_URL = "http://localhost:3000/"
+export const API_URL = "http://localhost:8080/api/cv/"
+
 function App() {
   return (
     <>

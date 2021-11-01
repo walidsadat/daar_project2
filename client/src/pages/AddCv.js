@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { CLIENT_URL, API_URL } from "../App"
 
 export default class Home extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ export default class Home extends Component {
   }
   handleAdd = () => {
     if (this.state.content.length > 0) {
-      axios.post("http://localhost:8080/api/cv/", {
+      axios.post(API_URL, {
         content: this.state.content
       }).catch(error => console.log(error));
     }
@@ -30,9 +31,9 @@ export default class Home extends Component {
     if (this.state.file) {
       const formData = new FormData();
       formData.append('file', this.state.file)
-      axios.post("http://localhost:8080/api/cv/file", formData)
+      axios.post(API_URL + "file", formData)
         .then(alert("Cv ajouté"))
-        .then(window.location.replace("http://localhost:3000"))
+        .then(window.location.replace(CLIENT_URL))
         .catch(error => console.log(error));
     }
   }
@@ -43,7 +44,7 @@ export default class Home extends Component {
         <form className='center'>
           <textarea type="text" onChange={this.handleContentChange} />
           <button onClick={this.handleAdd}>
-            Send
+            Add
           </button>
         </form>
         <br />
@@ -51,7 +52,7 @@ export default class Home extends Component {
         <div className='center'>
           <input type="file" accept=".pdf" onChange={this.onFileChange} />
           <button onClick={this.onFileUpload}>
-            Send
+            Upload
           </button>
         </div>
       </div>
