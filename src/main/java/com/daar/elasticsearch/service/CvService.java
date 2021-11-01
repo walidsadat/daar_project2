@@ -79,7 +79,21 @@ public class CvService {
         }
     }
 
+    public Cv getById(final String id) {
+        try {
+            final GetResponse documentFields = client.get(
+                    new GetRequest(Index.CV_INDEX, id),
+                    RequestOptions.DEFAULT
+            );
+            if (documentFields == null || documentFields.isSourceEmpty())
+                return null;
 
+            return MAPPER.readValue(documentFields.getSourceAsString(), Cv.class);
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+            return null;
+        }
+    }
 
     public Boolean index(final Cv cv) {
         try {
@@ -100,33 +114,13 @@ public class CvService {
         }
     }
 
-    public Cv getById(final String id) {
-        try {
-            final GetResponse documentFields = client.get(
-                    new GetRequest(Index.CV_INDEX, id),
-                    RequestOptions.DEFAULT
-            );
-            if (documentFields == null || documentFields.isSourceEmpty())
-                return null;
-
-            return MAPPER.readValue(documentFields.getSourceAsString(), Cv.class);
-        } catch (Exception e) {
-            LOG.error(e.getMessage(), e);
-            return null;
-        }
-    }
-
     public boolean indexFile(File file) {
         try {
-            final String cvAsString = PDFParser.parsePdf(file.getAbsolutePath());
+            String cvAsString = PDFParser.parsePdf(file.getAbsolutePath());
             final IndexRequest request = new IndexRequest(Index.CV_INDEX);
             request.id(UUID.randomUUID().toString());
             request.source(cvAsString, XContentType.JSON);
-
-
-
             final IndexResponse reponse = client.index(request, RequestOptions.DEFAULT);
-
             return reponse != null && reponse.status().equals(RestStatus.OK);
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);

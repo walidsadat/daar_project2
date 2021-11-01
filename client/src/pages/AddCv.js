@@ -28,24 +28,8 @@ export default class Home extends Component {
 
   onFileUpload = () =>{
     const formData = new FormData();
-    formData.append(
-      this.state.file,
-      this.state.file.name
-    )
-
-      const fs = require('fs');
-      const pdf = require('pdf-parse');
-
-      let dataBuffer = fs.readFileSync(this.state.file.path);
-
-
-      pdf(dataBuffer).then(function(data) {
-          axios.post("http://localhost:8080/api/cv",{
-              content : data.text
-          }).catch(error => console.log(error));
-      });
-
-
+    formData.append('file', this.state.file)
+    axios.post("http://localhost:8080/api/cv/file", formData).catch(error => console.log(error));
   }
 
 render() {
