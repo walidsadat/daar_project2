@@ -78,10 +78,9 @@ export default class Home extends Component {
           </button>
         </div>
         <div className = "center">
-          <button onClick={this.recreate}>
+          <button onClick={() => { if (window.confirm('Are you sure you wish to delete all files ?')) this.recreate() }}>
             Delete All
           </button>
-
         </div>
         {this.state.cvs.map((cv) => (
           <div className="center">
