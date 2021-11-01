@@ -57,6 +57,13 @@ export default class Home extends Component {
     }
   }
 
+  recreate() {
+    axios.post(API_URL + "recreate")
+        .then((response) => { this.setState({ cvs: response.data });}).catch(error => console.log(error))
+    window.location.reload();
+    alert("Index nettoyé");
+  }
+
   render() {
     return (
       <div>
@@ -69,6 +76,12 @@ export default class Home extends Component {
           <button onClick={this.handleSearch}>
             Search
           </button>
+        </div>
+        <div className = "center">
+          <button onClick={this.recreate}>
+            Delete All
+          </button>
+
         </div>
         {this.state.cvs.map((cv) => (
           <div className="center">
@@ -84,4 +97,6 @@ export default class Home extends Component {
       </div>
     );
   }
+
+
 }

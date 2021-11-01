@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/index")
+@RequestMapping("api/cv")
 public class IndexController {
     private final IndexService indexService;
     @Autowired
