@@ -9,6 +9,8 @@ Si Elasticsearch n'est pas lancé sur le port **9200**, modifiez la valeur de **
 
 Lancez le fichier main `./src/main/java/com/daar/elasticsearch/ElasticsearchApplication.java`.
 
+Il faut télécharger le fichier jar PDFBOX et l'ajouter comme libraire externe : https://www.apache.org/dyn/closer.lua/pdfbox/2.0.24/pdfbox-app-2.0.24.jar
+
 ## Frontend
 Pour executer le *frontend* exécutez les commandes suivante :
 ```
