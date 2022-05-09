@@ -2,6 +2,8 @@
 
 Ce projet a été réalisé par *Amine BENSLIMANE* et *Walid SADAT* dans le cadre de l'UE Développement des Algorithmes d’Application Réticulaire à Sorbonne Université.
 
+Ce projet consiste à indexer des CVs issus de plusieurs formats dans Elasticsearch afin d’être en mesure de les requêter par la suite.
+
 ## Backend
 Pour executer le *backend*, lancez d'abord **Elasticsearch** (sur le port **9200** par défaut).
 
